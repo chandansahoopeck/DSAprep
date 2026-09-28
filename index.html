@@ -1,0 +1,2503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Design & DSA Mastery Roadmap</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Inter', sans-serif;
+background: #0a0a0a;
+color: #ffffff;
+overflow-x: hidden;
+}
+
+.font-mono {
+font-family: 'JetBrains Mono', monospace;
+}
+
+/* Animated Background */
+#canvas-container {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+.particle {
+position: absolute;
+border-radius: 50%;
+background: rgba(99, 102, 241, 0.3);
+pointer-events: none;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+background: rgba(255, 255, 255, 0.03);
+backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card-hover {
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+background: rgba(255, 255, 255, 0.08);
+border: 1px solid rgba(99, 102, 241, 0.5);
+transform: translateY(-8px);
+box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+}
+
+/* Gradient Text */
+.gradient-text {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.gradient-text-2 {
+background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+.gradient-text-3 {
+background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+
+/* Animated Grid */
+.animated-grid {
+background-image:
+linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+background-size: 50px 50px;
+animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+0% { transform: translate(0, 0); }
+100% { transform: translate(50px, 50px); }
+}
+
+/* Timeline */
+.timeline-item {
+position: relative;
+padding-left: 3rem;
+border-left: 3px solid rgba(99, 102, 241, 0.3);
+margin-left: 1rem;
+transition: all 0.3s ease;
+}
+
+.timeline-item::before {
+content: '';
+position: absolute;
+left: -10px;
+top: 0;
+width: 17px;
+height: 17px;
+border-radius: 50%;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+border: 3px solid #0a0a0a;
+transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+border-left-color: #667eea;
+}
+
+.timeline-item:hover::before {
+transform: scale(1.3);
+box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+}
+
+/* DSA Pattern Cards */
+.dsa-card {
+position: relative;
+overflow: hidden;
+transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dsa-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+transition: left 0.5s;
+}
+
+.dsa-card:hover::before {
+left: 100%;
+}
+
+.dsa-card:hover {
+transform: translateY(-5px) scale(1.02);
+box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+}
+
+.complexity-badge {
+display: inline-block;
+padding: 0.25rem 0.75rem;
+border-radius: 9999px;
+font-size: 0.75rem;
+font-weight: 600;
+font-family: 'JetBrains Mono', monospace;
+}
+
+.complexity-o1 { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+.complexity-logn { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+.complexity-on { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+.complexity-on2 { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+/* Progress Rings */
+.progress-ring {
+transform: rotate(-90deg);
+}
+
+.progress-ring-circle {
+transition: stroke-dashoffset 0.5s ease;
+}
+
+/* Floating Elements */
+@keyframes float {
+0%, 100% { transform: translateY(0px); }
+50% { transform: translateY(-20px); }
+}
+
+.float-animation {
+animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse-glow {
+0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.4); }
+50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.8); }
+}
+
+.pulse-glow {
+animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Tab System */
+.tab-content {
+display: none;
+animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+display: block;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-button {
+position: relative;
+transition: all 0.3s ease;
+}
+
+.tab-button::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 50%;
+transform: translateX(-50%);
+width: 0;
+height: 3px;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+transition: width 0.3s ease;
+}
+
+.tab-button.active::after {
+width: 80%;
+}
+
+/* Connection Lines */
+.connection-line {
+position: absolute;
+height: 2px;
+background: linear-gradient(90deg, transparent, #667eea, transparent);
+transform-origin: left center;
+opacity: 0.5;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+width: 10px;
+}
+
+::-webkit-scrollbar-track {
+background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Neon Glow Effects */
+.neon-blue {
+box-shadow: 0 0 10px #4facfe, 0 0 20px #4facfe, 0 0 30px #4facfe;
+}
+
+.neon-purple {
+box-shadow: 0 0 10px #764ba2, 0 0 20px #764ba2, 0 0 30px #764ba2;
+}
+
+.neon-pink {
+box-shadow: 0 0 10px #f5576c, 0 0 20px #f5576c, 0 0 30px #f5576c;
+}
+
+/* Interactive Nodes */
+.node {
+position: relative;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.node:hover {
+transform: scale(1.1);
+}
+
+.node::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 100%;
+height: 100%;
+border-radius: 50%;
+border: 2px solid #667eea;
+animation: ripple 1.5s ease-out infinite;
+}
+
+@keyframes ripple {
+0% { width: 100%; height: 100%; opacity: 1; }
+100% { width: 300%; height: 300%; opacity: 0; }
+}
+
+/* Code Block Styling */
+.code-block {
+background: rgba(0, 0, 0, 0.6);
+border: 1px solid rgba(99, 102, 241, 0.3);
+border-radius: 8px;
+padding: 1.5rem;
+font-family: 'JetBrains Mono', monospace;
+overflow-x: auto;
+}
+
+/* Stats Counter */
+.stat-number {
+font-size: 3rem;
+font-weight: 800;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+/* Modal */
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.8);
+backdrop-filter: blur(10px);
+z-index: 1000;
+justify-content: center;
+align-items: center;
+}
+
+.modal.active {
+display: flex;
+animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+border: 1px solid rgba(99, 102, 241, 0.5);
+border-radius: 20px;
+padding: 2rem;
+max-width: 800px;
+width: 90%;
+max-height: 80vh;
+overflow-y: auto;
+transform: scale(0.9);
+transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+transform: scale(1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+.stat-number { font-size: 2rem; }
+.timeline-item { padding-left: 2rem; }
+}
+
+/* Loading Animation */
+.loader {
+border: 3px solid rgba(99, 102, 241, 0.1);
+border-top: 3px solid #667eea;
+border-radius: 50%;
+width: 40px;
+height: 40px;
+animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+/* Tooltip */
+.tooltip {
+position: relative;
+}
+
+.tooltip::after {
+content: attr(data-tooltip);
+position: absolute;
+bottom: 100%;
+left: 50%;
+transform: translateX(-50%) translateY(-10px);
+background: rgba(0, 0, 0, 0.9);
+color: white;
+padding: 0.5rem 1rem;
+border-radius: 8px;
+font-size: 0.875rem;
+white-space: nowrap;
+opacity: 0;
+pointer-events: none;
+transition: all 0.3s ease;
+}
+
+.tooltip:hover::after {
+opacity: 1;
+transform: translateX(-50%) translateY(-5px);
+}
+
+/* Skill Bars */
+.skill-bar {
+height: 8px;
+background: rgba(99, 102, 241, 0.2);
+border-radius: 4px;
+overflow: hidden;
+}
+
+.skill-progress {
+height: 100%;
+background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+border-radius: 4px;
+transition: width 1s ease;
+position: relative;
+overflow: hidden;
+}
+
+.skill-progress::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+background: linear-gradient(
+90deg,
+transparent,
+rgba(255, 255, 255, 0.3),
+transparent
+);
+animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+0% { transform: translateX(-100%); }
+100% { transform: translateX(100%); }
+}
+
+/* Badge System */
+.badge {
+display: inline-flex;
+align-items: center;
+padding: 0.25rem 0.75rem;
+border-radius: 9999px;
+font-size: 0.75rem;
+font-weight: 600;
+margin: 0.25rem;
+transition: all 0.3s ease;
+}
+
+.badge:hover {
+transform: scale(1.1);
+}
+
+.badge-dsa { background: rgba(99, 102, 241, 0.2); color: #6366f1; border: 1px solid #6366f1; }
+.badge-hld { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
+.badge-lld { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; }
+.badge-sd { background: rgba(236, 72, 153, 0.2); color: #ec4899; border: 1px solid #ec4899; }
+
+/* Interactive Map */
+.concept-map {
+position: relative;
+min-height: 600px;
+}
+
+.map-node {
+position: absolute;
+width: 120px;
+height: 120px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 1rem;
+cursor: pointer;
+transition: all 0.3s ease;
+font-weight: 600;
+font-size: 0.875rem;
+}
+
+.map-node:hover {
+transform: scale(1.1);
+z-index: 10;
+}
+
+/* Accordion */
+.accordion-item {
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.accordion-header {
+padding: 1.5rem;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+transition: all 0.3s ease;
+}
+
+.accordion-header:hover {
+background: rgba(99, 102, 241, 0.1);
+}
+
+.accordion-content {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.3s ease;
+}
+
+.accordion-content.active {
+max-height: 1000px;
+}
+
+.accordion-icon {
+transition: transform 0.3s ease;
+}
+
+.accordion-icon.rotate {
+transform: rotate(180deg);
+}
+
+/* Card Grid Patterns */
+.pattern-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+}
+
+/* Navigation */
+.nav-glow {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+height: 2px;
+background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+z-index: 100;
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+
+.nav-glow.visible {
+opacity: 1;
+}
+</style>
+</head>
+<body>
+<!-- Animated Background -->
+<div id="canvas-container">
+<div class="animated-grid absolute inset-0 opacity-20"></div>
+</div>
+
+<!-- Navigation Glow Indicator -->
+<div class="nav-glow" id="navGlow"></div>
+
+<!-- Hero Section -->
+<section class="min-h-screen flex items-center justify-center relative overflow-hidden px-4">
+<div class="absolute inset-0 z-0">
+<div class="absolute top-20 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+<div class="absolute top-40 right-20 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+<div class="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+</div>
+
+<div class="max-w-7xl mx-auto text-center relative z-10">
+<div class="float-animation mb-8">
+<div class="inline-block glass-card px-6 py-3 rounded-full mb-6">
+<span class="text-indigo-400 font-mono text-sm">
+<i class="fas fa-code mr-2"></i>8-Week Mastery Journey
+</span>
+</div>
+</div>
+
+<h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+<span class="gradient-text">System Design</span>
+<br />
+<span class="gradient-text-2">& DSA Patterns</span>
+<br />
+<span class="gradient-text-3">Mastery Roadmap</span>
+</h1>
+
+<p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto">
+Connect the dots between <span class="text-indigo-400 font-semibold">Data Structures</span>,
+<span class="text-green-400 font-semibold">System Design</span>, and
+<span class="text-pink-400 font-semibold">Real-World Applications</span>
+</p>
+
+<div class="flex flex-wrap justify-center gap-6 mb-12">
+<div class="glass-card px-8 py-4 rounded-2xl float-animation" style="animation-delay: 0s;">
+<div class="stat-number" data-target="17">0</div>
+<div class="text-gray-400 mt-2">DSA Patterns</div>
+</div>
+<div class="glass-card px-8 py-4 rounded-2xl float-animation" style="animation-delay: 0.2s;">
+<div class="stat-number" data-target="8">0</div>
+<div class="text-gray-400 mt-2">Weeks</div>
+</div>
+<div class="glass-card px-8 py-4 rounded-2xl float-animation" style="animation-delay: 0.4s;">
+<div class="stat-number" data-target="50">0</div>
+<div class="text-gray-400 mt-2">Components</div>
+</div>
+<div class="glass-card px-8 py-4 rounded-2xl float-animation" style="animation-delay: 0.6s;">
+<div class="stat-number" data-target="100">0</div>
+<div class="text-gray-400 mt-2">Problems</div>
+</div>
+</div>
+
+<div class="flex flex-wrap justify-center gap-4">
+<button onclick="scrollToSection('roadmap')" class="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full font-semibold hover:shadow-2xl hover:shadow-indigo-500/50 transition-all transform hover:scale-105 pulse-glow">
+<i class="fas fa-rocket mr-2"></i>Start Journey
+</button>
+<button onclick="scrollToSection('concepts')" class="px-8 py-4 glass-card rounded-full font-semibold hover:bg-white/10 transition-all">
+<i class="fas fa-map mr-2"></i>Explore Concepts
+</button>
+</div>
+</div>
+</section>
+
+<!-- Main Navigation Tabs -->
+<nav class="sticky top-0 z-50 glass-card border-y border-white/10 py-4 px-6">
+<div class="max-w-7xl mx-auto flex flex-wrap justify-center gap-4">
+<button class="tab-button active px-6 py-2 text-indigo-400 font-semibold" onclick="switchTab('roadmap')">
+<i class="fas fa-route mr-2"></i>Roadmap
+</button>
+<button class="tab-button px-6 py-2 text-gray-400 hover:text-white transition-colors" onclick="switchTab('dsa')">
+<i class="fas fa-brain mr-2"></i>DSA Patterns
+</button>
+<button class="tab-button px-6 py-2 text-gray-400 hover:text-white transition-colors" onclick="switchTab('hld')">
+<i class="fas fa-building mr-2"></i>HLD
+</button>
+<button class="tab-button px-6 py-2 text-gray-400 hover:text-white transition-colors" onclick="switchTab('lld')">
+<i class="fas fa-microchip mr-2"></i>LLD
+</button>
+<button class="tab-button px-6 py-2 text-gray-400 hover:text-white transition-colors" onclick="switchTab('integration')">
+<i class="fas fa-project-diagram mr-2"></i>Integration
+</button>
+<button class="tab-button px-6 py-2 text-gray-400 hover:text-white transition-colors" onclick="switchTab('progress')">
+<i class="fas fa-chart-line mr-2"></i>Progress
+</button>
+</div>
+</nav>
+
+<!-- Tab Content: Roadmap -->
+<div id="roadmap" class="tab-content active">
+<!-- 8-Week Timeline -->
+<section class="py-20 px-4" id="timeline-section">
+<div class="max-w-6xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Your 8-Week Journey</h2>
+<p class="text-center text-gray-400 mb-16 text-lg">Structured path from foundations to mastery</p>
+
+<div class="space-y-8">
+<!-- Week 1-2 -->
+<div class="timeline-item glass-card p-8 rounded-2xl glass-card-hover">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+<div>
+<h3 class="text-2xl font-bold text-indigo-400 mb-2">Weeks 1-2: Foundations</h3>
+<p class="text-gray-400">Build strong fundamentals</p>
+</div>
+<span class="badge badge-hld mt-2 md:mt-0">HLD Focus</span>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mt-6">
+<div class="space-y-3">
+<h4 class="font-semibold text-white mb-3">HLD Building Blocks:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Load Balancing</li>
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Caching Strategies</li>
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Database Indexing</li>
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Queues & Messaging</li>
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Sharding & Replication</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h4 class="font-semibold text-white mb-3">Daily Practice:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-code text-indigo-500 mr-2"></i>DSA: Medium problems (timed)</li>
+<li><i class="fas fa-cube text-purple-500 mr-2"></i>Build: Gateway skeleton (Phase 1)</li>
+<li><i class="fas fa-server text-pink-500 mr-2"></i>MCP server, router, mock backends</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Week 3-4 -->
+<div class="timeline-item glass-card p-8 rounded-2xl glass-card-hover">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+<div>
+<h3 class="text-2xl font-bold text-green-400 mb-2">Weeks 3-4: LLD Depth</h3>
+<p class="text-gray-400">Implement core components</p>
+</div>
+<span class="badge badge-lld mt-2 md:mt-0">LLD Focus</span>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mt-6">
+<div class="space-y-3">
+<h4 class="font-semibold text-white mb-3">Build Real Modules:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Rate Limiter (Token bucket/Sliding window)</li>
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>LRU/TTL Cache implementation</li>
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Wire into gateway</li>
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Test & optimize</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h4 class="font-semibold text-white mb-3">Continue:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-code text-indigo-500 mr-2"></i>Daily DSA practice</li>
+<li><i class="fas fa-layer-group text-purple-500 mr-2"></i>Start Phase 2 (VLLM) when stable</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Week 5-6 -->
+<div class="timeline-item glass-card p-8 rounded-2xl glass-card-hover">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+<div>
+<h3 class="text-2xl font-bold text-yellow-400 mb-2">Weeks 5-6: Scale Up</h3>
+<p class="text-gray-400">Advanced components & mock interviews</p>
+</div>
+<span class="badge badge-sd mt-2 md:mt-0">System Design</span>
+</div>
+<div class="grid md:grid-cols-2 gap-6 mt-6">
+<div class="space-y-3">
+<h4 class="font-semibold text-white mb-3">Build Components:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Finish Phase 2</li>
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Job Scheduler with retries</li>
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Distributed task queue</li>
+<li><i class="fas fa-check-circle text-green-500 mr-2"></i>Priority queue implementation</li>
+</ul>
+</div>
+<div class="space-y-3">
+<h4 class="font-semibold text-white mb-3">Mock Interviews:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-users text-indigo-500 mr-2"></i>Exponent or Greenroom</li>
+<li><i class="fas fa-comments text-purple-500 mr-2"></i>Real feedback sessions</li>
+<li><i class="fas fa-lightbulb text-pink-500 mr-2"></i>Trade-off articulation practice</li>
+<li><i class="fas fa-chart-line text-green-500 mr-2"></i>Keep DSA cadence going</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Week 7-8 -->
+<div class="timeline-item glass-card p-8 rounded-2xl glass-card-hover">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+<div>
+<h3 class="text-2xl font-bold text-pink-400 mb-2">Weeks 7-8: Consolidate</h3>
+<p class="text-gray-400">Apply & polish</p>
+</div>
+<span class="badge badge-dsa mt-2 md:mt-0">Integration</span>
+</div>
+<div class="space-y-4 mt-6">
+<div class="glass-card p-4 rounded-xl">
+<h4 class="font-semibold text-white mb-2">Phase 3 (Optional): Memory/Context Layer</h4>
+<p class="text-gray-400 text-sm">If time allows - otherwise polish what exists rather than starting it half-finished</p>
+</div>
+<div class="glass-card p-4 rounded-xl">
+<h4 class="font-semibold text-white mb-2">Behavioral Prep:</h4>
+<p class="text-gray-400 text-sm">STAR-format stories from real project decisions (the trade-offs you actually made are the answer, not generic ones)</p>
+</div>
+<div class="glass-card p-4 rounded-xl">
+<h4 class="font-semibold text-white mb-2">Start Applying:</h4>
+<p class="text-gray-400 text-sm">A strong, working Phase 1+2 beats a theoretical Phase 1+2+3</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Resources Section -->
+<section class="py-20 px-4 bg-gradient-to-b from-transparent to-indigo-900/20">
+<div class="max-w-6xl mx-auto">
+<h2 class="text-4xl font-bold text-center mb-12 gradient-text-2">Recommended Resources</h2>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="glass-card p-6 rounded-2xl glass-card-hover">
+<div class="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center mb-4">
+<i class="fas fa-graduation-cap text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-2">Exponent / Greenroom</h3>
+<p class="text-gray-400 text-sm mb-4">Structured mock system-design interviews with real feedback - current go-to picks for this stage of prep</p>
+<span class="badge badge-sd">Mock Interviews</span>
+</div>
+
+<div class="glass-card p-6 rounded-2xl glass-card-hover">
+<div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+<i class="fas fa-book text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-2">DesignGurus</h3>
+<p class="text-gray-400 text-sm mb-4">Grokking-style courses - commonly recommended specifically for HLD when candidate's background is backend-heavy</p>
+<span class="badge badge-hld">HLD Courses</span>
+</div>
+
+<div class="glass-card p-6 rounded-2xl glass-card-hover">
+<div class="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center mb-4">
+<i class="fas fa-laptop-code text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-2">LeetCode/NeetCode</h3>
+<p class="text-gray-400 text-sm mb-4">Daily DSA practice with pattern-based learning and visual explanations</p>
+<span class="badge badge-dsa">DSA Practice</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- Tab Content: DSA Patterns -->
+<div id="dsa" class="tab-content">
+<section class="py-20 px-4">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">DSA Patterns in Backend Systems</h2>
+<p class="text-center text-gray-400 mb-16 text-lg">17 essential patterns mapped to real-world applications</p>
+
+<div class="pattern-grid">
+<!-- Hash Map -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('hashmap')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-indigo-400">Hash Map</h3>
+<span class="complexity-badge complexity-o1">O(1) avg</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Fundamental data structure for constant-time lookups</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Caches</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Dedup sets</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Request routing tables</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>DataLoader batching</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>DB hash joins</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-indigo-600/20 border border-indigo-600/50 rounded-lg text-indigo-400 text-sm hover:bg-indigo-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Doubly Linked List + Hash Map -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('lru')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-purple-400">Doubly Linked List + Hash Map</h3>
+<span class="complexity-badge complexity-o1">O(1) get/put</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">LRU Cache implementation</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>LRU cache</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Session management</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Memory management</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-purple-600/20 border border-purple-600/50 rounded-lg text-purple-400 text-sm hover:bg-purple-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Trie / Radix Tree -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('trie')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-pink-400">Trie / Radix Tree</h3>
+<span class="complexity-badge complexity-on">O(k)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Prefix-based data structure</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>URL routers</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>IP routing tables</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Autocomplete</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Feature-flag prefixes</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-pink-600/20 border border-pink-600/50 rounded-lg text-pink-400 text-sm hover:bg-pink-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Heap / Priority Queue -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('heap')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-yellow-400">Heap / Priority Queue</h3>
+<span class="complexity-badge complexity-logn">O(log n)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Efficient priority-based operations</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Task scheduling</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Top-K queries</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Timer wheels</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Dijkstra's algorithm</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>K-way merge</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-yellow-600/20 border border-yellow-600/50 rounded-lg text-yellow-400 text-sm hover:bg-yellow-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- B-Tree / B+ Tree -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('btree')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-green-400">B-Tree / B+ Tree</h3>
+<span class="complexity-badge complexity-logn">O(log n)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Database indexing structure</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Every relational index</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>PostgreSQL, MySQL indexes</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>File systems</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-green-600/20 border border-green-600/50 rounded-lg text-green-400 text-sm hover:bg-green-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- LSM Tree + SSTables -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('lsm')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-blue-400">LSM Tree + SSTables</h3>
+<span class="complexity-badge complexity-o1">O(1) write amortized</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Write-optimized storage</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Cassandra</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>RocksDB</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>LevelDB</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-blue-600/20 border border-blue-600/50 rounded-lg text-blue-400 text-sm hover:bg-blue-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Sliding Window -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('sliding')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-red-400">Sliding Window</h3>
+<span class="complexity-badge complexity-on">O(n)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Efficient range processing</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Rate limiters</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Moving averages</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Stream aggregation</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-red-600/20 border border-red-600/50 rounded-lg text-red-400 text-sm hover:bg-red-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Two Pointers / Merge -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('twopointers')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-cyan-400">Two Pointers / Merge</h3>
+<span class="complexity-badge complexity-on">O(n+m)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Efficient array/list processing</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Intersecting sorted posting lists</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Merging sorted shards</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-cyan-600/20 border border-cyan-600/50 rounded-lg text-cyan-400 text-sm hover:bg-cyan-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Binary Search -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('binary')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-orange-400">Binary Search</h3>
+<span class="complexity-badge complexity-logn">O(log n)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Efficient search in sorted data</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Consistent hashing ring lookup</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Time-series index seek</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Rate-limit calibration</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-orange-600/20 border border-orange-600/50 rounded-lg text-orange-400 text-sm hover:bg-orange-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Bloom Filter -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('bloom')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-teal-400">Bloom Filter</h3>
+<span class="complexity-badge complexity-o1">O(k)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Probabilistic set membership</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Cache penetration guard</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>"Definitely not in this SSTable"</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Dedup at scale</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-teal-600/20 border border-teal-600/50 rounded-lg text-teal-400 text-sm hover:bg-teal-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Count-Min Sketch -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('countmin')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-lime-400">Count-Min Sketch</h3>
+<span class="complexity-badge complexity-o1">O(k)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Frequency estimation</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Heavy-hitter detection</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Approximate rate limiting</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>W-TinyLFU admission</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-lime-600/20 border border-lime-600/50 rounded-lg text-lime-400 text-sm hover:bg-lime-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- HyperLogLog -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('hll')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-emerald-400">HyperLogLog</h3>
+<span class="complexity-badge complexity-o1">O(1)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Cardinality estimation</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Approximate distinct counts</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Unique visitors in 12 KB</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-emerald-600/20 border border-emerald-600/50 rounded-lg text-emerald-400 text-sm hover:bg-emerald-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Consistent Hashing -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('consistent')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-violet-400">Consistent Hashing</h3>
+<span class="complexity-badge complexity-logn">O(log n)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Distributed system partitioning</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Sharding</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Cache clusters</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Load balancer key affinity</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-violet-600/20 border border-violet-600/50 rounded-lg text-violet-400 text-sm hover:bg-violet-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Merkle Tree -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('merkle')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-fuchsia-400">Merkle Tree</h3>
+<span class="complexity-badge complexity-logn">O(log n)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Cryptographic verification</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Anti-entropy repair (Dynamo/Cassandra)</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Git</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Blockchains</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-fuchsia-600/20 border border-fuchsia-600/50 rounded-lg text-fuchsia-400 text-sm hover:bg-fuchsia-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Topological Sort -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('topo')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-rose-400">Topological Sort</h3>
+<span class="complexity-badge complexity-on">O(V+E)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">DAG ordering</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Task/DAG dependency resolution</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Migration ordering</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Build systems</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-rose-600/20 border border-rose-600/50 rounded-lg text-rose-400 text-sm hover:bg-rose-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Union-Find -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('union')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-amber-400">Union-Find</h3>
+<span class="complexity-badge complexity-o1">~O(1)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Disjoint set operations</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Connected components</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Fraud-ring detection</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Dedup clustering</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-amber-600/20 border border-amber-600/50 rounded-lg text-amber-400 text-sm hover:bg-amber-600/30 transition-colors">
+Learn More
+</button>
+</div>
+
+<!-- Graph BFS/DFS -->
+<div class="dsa-card glass-card p-6 rounded-2xl cursor-pointer" onclick="openModal('graph')">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-sky-400">Graph BFS/DFS</h3>
+<span class="complexity-badge complexity-on">O(V+E)</span>
+</div>
+<p class="text-gray-400 text-sm mb-4">Graph traversal algorithms</p>
+<div class="space-y-2">
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Permission traversal (ReBAC)</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Social graphs</span>
+</div>
+<div class="flex items-center text-sm text-gray-300">
+<i class="fas fa-database text-green-500 mr-2"></i>
+<span>Dependency impact analysis</span>
+</div>
+</div>
+<button class="mt-4 w-full py-2 bg-sky-600/20 border border-sky-600/50 rounded-lg text-sky-400 text-sm hover:bg-sky-600/30 transition-colors">
+Learn More
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- Tab Content: HLD -->
+<div id="hld" class="tab-content">
+<section class="py-20 px-4">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text-2">High-Level Design Components</h2>
+<p class="text-center text-gray-400 mb-16 text-lg">Building blocks of scalable systems</p>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Load Balancing -->
+<div class="glass-card p-6 rounded-2xl glass-card-hover">
+<div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mb-4">
+<i class="fas fa-balance-scale text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">Load Balancing</h3>
+<p class="text-gray-400 text-sm mb-4">Distribute traffic across multiple servers</p>
+<div class="space-y-2 text-sm">
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-indigo-400 mr-2"></i>
+<span>Layer 4 (Transport)</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-indigo-400 mr-2"></i>
+<span>Layer 7 (Application)</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-indigo-400 mr-2"></i>
+<span>Round Robin, Least Connections</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-indigo-400 mr-2"></i>
+<span>IP Hash, Weighted Distribution</span>
+</div>
+</div>
+</div>
+
+<!-- Caching -->
+<div class="glass-card p-6 rounded-2xl glass-card-hover">
+<div class="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mb-4">
+<i class="fas fa-bolt text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">Caching</h3>
+<p class="text-gray-400 text-sm mb-4">Reduce latency and database load</p>
+<div class="space-y-2 text-sm">
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-green-400 mr-2"></i>
+<span>Cache-Aside Pattern</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-green-400 mr-2"></i>
+<span>Write-Through</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-green-400 mr-2"></i>
+<span>Write-Behind</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-green-400 mr-2"></i>
+<span>Refresh Ahead</span>
+</div>
+</div>
+</div>
+
+<!-- Database -->
+<div class="glass-card p-6 rounded-2xl glass-card-hover">
+<div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mb-4">
+<i class="fas fa-database text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">Database Design</h3>
+<p class="text-gray-400 text-sm mb-4">Storage and retrieval strategies</p>
+<div class="space-y-2 text-sm">
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-purple-400 mr-2"></i>
+<span>SQL vs NoSQL</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-purple-400 mr-2"></i>
+<span>Replication & Sharding</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-purple-400 mr-2"></i>
+<span>Indexing Strategies</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-purple-400 mr-2"></i>
+<span>Denormalization</span>
+</div>
+</div>
+</div>
+
+<!-- Message Queues -->
+<div class="glass-card p-6 rounded-2xl glass-card-hover">
+<div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center mb-4">
+<i class="fas fa-envelope-open-text text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">Message Queues</h3>
+<p class="text-gray-400 text-sm mb-4">Asynchronous communication</p>
+<div class="space-y-2 text-sm">
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-yellow-400 mr-2"></i>
+<span>Task Queues</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-yellow-400 mr-2"></i>
+<span>Pub/Sub Pattern</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-yellow-400 mr-2"></i>
+<span>Priority Queues</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-yellow-400 mr-2"></i>
+<span>Event-Driven Architecture</span>
+</div>
+</div>
+</div>
+
+<!-- CDN -->
+<div class="glass-card p-6 rounded-2xl glass-card-hover">
+<div class="w-14 h-14 bg-gradient-to-br from-red-500 to-rose-600 rounded-xl flex items-center justify-center mb-4">
+<i class="fas fa-globe text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">CDN</h3>
+<p class="text-gray-400 text-sm mb-4">Content Delivery Networks</p>
+<div class="space-y-2 text-sm">
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-red-400 mr-2"></i>
+<span>Push CDN</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-red-400 mr-2"></i>
+<span>Pull CDN</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-red-400 mr-2"></i>
+<span>Edge Caching</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-red-400 mr-2"></i>
+<span>Static Content Delivery</span>
+</div>
+</div>
+</div>
+
+<!-- Replication -->
+<div class="glass-card p-6 rounded-2xl glass-card-hover">
+<div class="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-4">
+<i class="fas fa-copy text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">Replication</h3>
+<p class="text-gray-400 text-sm mb-4">Data redundancy and availability</p>
+<div class="space-y-2 text-sm">
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-cyan-400 mr-2"></i>
+<span>Master-Slave</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-cyan-400 mr-2"></i>
+<span>Master-Master</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-cyan-400 mr-2"></i>
+<span>Multi-Region</span>
+</div>
+<div class="flex items-center text-gray-300">
+<i class="fas fa-angle-right text-cyan-400 mr-2"></i>
+<span>Eventual Consistency</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CAP Theorem Section -->
+<div class="mt-16 glass-card p-8 rounded-2xl">
+<h3 class="text-2xl font-bold mb-6 text-center gradient-text">CAP Theorem</h3>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="text-center p-6 rounded-xl bg-gradient-to-br from-indigo-600/20 to-purple-600/20 border border-indigo-500/30">
+<div class="text-3xl font-bold text-indigo-400 mb-2">CP</div>
+<p class="text-gray-300">Consistency + Partition Tolerance</p>
+<p class="text-sm text-gray-400 mt-2">Choose consistency over availability</p>
+</div>
+<div class="text-center p-6 rounded-xl bg-gradient-to-br from-green-600/20 to-emerald-600/20 border border-green-500/30">
+<div class="text-3xl font-bold text-green-400 mb-2">AP</div>
+<p class="text-gray-300">Availability + Partition Tolerance</p>
+<p class="text-sm text-gray-400 mt-2">Choose availability over consistency</p>
+</div>
+<div class="text-center p-6 rounded-xl bg-gradient-to-br from-pink-600/20 to-rose-600/20 border border-pink-500/30">
+<div class="text-3xl font-bold text-pink-400 mb-2">Trade-off</div>
+<p class="text-gray-300">Can't have all three</p>
+<p class="text-sm text-gray-400 mt-2">Choose based on requirements</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- Tab Content: LLD -->
+<div id="lld" class="tab-content">
+<section class="py-20 px-4">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text-3">Low-Level Design Implementation</h2>
+<p class="text-center text-gray-400 mb-16 text-lg">From your handwritten notes to production code</p>
+
+<div class="space-y-8">
+<!-- Rate Limiters -->
+<div class="glass-card p-8 rounded-2xl">
+<div class="flex items-start justify-between mb-6">
+<div>
+<h3 class="text-2xl font-bold text-indigo-400 mb-2">Rate Limiters</h3>
+<p class="text-gray-400">Gateway's tool call throttling</p>
+</div>
+<span class="badge badge-lld">Weeks 3-4</span>
+</div>
+
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<div class="p-4 rounded-xl bg-indigo-900/20 border border-indigo-500/30">
+<h4 class="font-semibold mb-3 text-indigo-300">Token Bucket</h4>
+<ul class="space-y-2 text-sm text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Fixed rate token generation</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Burst capacity allowed</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Good for API rate limiting</li>
+</ul>
+</div>
+<div class="p-4 rounded-xl bg-purple-900/20 border border-purple-500/30">
+<h4 class="font-semibold mb-3 text-purple-300">Sliding Window</h4>
+<ul class="space-y-2 text-sm text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Smooth rate limiting</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>No burst at boundaries</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>More accurate counting</li>
+</ul>
+</div>
+</div>
+
+<div class="code-block">
+<pre><code class="text-sm text-gray-300">
+# Redis-backed Rate Limiter (Sliding Window)
+class SlidingWindowRateLimiter:
+def __init__(self, redis_client, max_requests, window_seconds):
+self.redis = redis_client
+self.max_requests = max_requests
+self.window = window_seconds
+
+def is_allowed(self, user_id):
+key = f"rate_limit:{user_id}"
+now = time.time()
+window_start = now - self.window
+
+# Remove old entries
+self.redis.zremrangebyscore(key, 0, window_start)
+
+# Count requests in window
+count = self.redis.zcard(key)
+
+if count < self.max_requests:
+self.redis.zadd(key, {str(now): now})
+self.redis.expire(key, self.window)
+return True
+return False
+</code></pre>
+</div>
+</div>
+
+<!-- LRU/LFU Cache -->
+<div class="glass-card p-8 rounded-2xl">
+<div class="flex items-start justify-between mb-6">
+<div>
+<h3 class="text-2xl font-bold text-purple-400 mb-2">LRU/LFU Cache with TTL</h3>
+<p class="text-gray-400">Phase 3's context/memory eviction layer</p>
+</div>
+<span class="badge badge-lld">Weeks 3-4</span>
+</div>
+
+<div class="grid md:grid-cols-2 gap-6 mb-6">
+<div class="p-4 rounded-xl bg-purple-900/20 border border-purple-500/30">
+<h4 class="font-semibold mb-3 text-purple-300">LRU (Least Recently Used)</h4>
+<ul class="space-y-2 text-sm text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Doubly linked list + hash map</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>O(1) get/put operations</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Evict least recently accessed</li>
+</ul>
+</div>
+<div class="p-4 rounded-xl bg-pink-900/20 border border-pink-500/30">
+<h4 class="font-semibold mb-3 text-pink-300">LFU (Least Frequently Used)</h4>
+<ul class="space-y-2 text-sm text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Frequency counter + min heap</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>O(log n) operations</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Evict least frequently accessed</li>
+</ul>
+</div>
+</div>
+
+<div class="code-block">
+<pre><code class="text-sm text-gray-300">
+# LRU Cache Implementation
+class LRUCache:
+def __init__(self, capacity: int, ttl: int = 300):
+self.capacity = capacity
+self.ttl = ttl
+self.cache = {} # key -> (value, timestamp, node)
+self.size = 0
+
+# Doubly linked list
+self.head = Node() # Dummy head (MRU)
+self.tail = Node() # Dummy tail (LRU)
+self.head.next = self.tail
+self.tail.prev = self.head
+
+def get(self, key: int) -> int:
+if key not in self.cache:
+return -1
+
+value, timestamp, node = self.cache[key]
+
+# Check TTL
+if time.time() - timestamp > self.ttl:
+self._remove_node(node)
+del self.cache[key]
+self.size -= 1
+return -1
+
+# Move to head (most recently used)
+self._move_to_head(node)
+return value
+
+def put(self, key: int, value: int) -> None:
+if key in self.cache:
+_, _, node = self.cache[key]
+node.value = value
+self._move_to_head(node)
+self.cache[key] = (value, time.time(), node)
+else:
+if self.size >= self.capacity:
+# Evict LRU
+lru_node = self.tail.prev
+self._remove_node(lru_node)
+del self.cache[lru_node.key]
+self.size -= 1
+
+new_node = Node(key, value)
+self._add_node(new_node)
+self.cache[key] = (value, time.time(), new_node)
+self.size += 1
+</code></pre>
+</div>
+</div>
+
+<!-- Priority Queue -->
+<div class="glass-card p-8 rounded-2xl">
+<div class="flex items-start justify-between mb-6">
+<div>
+<h3 class="text-2xl font-bold text-yellow-400 mb-2">Priority Queue / Job Scheduler</h3>
+<p class="text-gray-400">Async execution for longer running automations</p>
+</div>
+<span class="badge badge-lld">Weeks 5-6</span>
+</div>
+
+<div class="p-4 rounded-xl bg-yellow-900/20 border border-yellow-500/30 mb-6">
+<h4 class="font-semibold mb-3 text-yellow-300">Features:</h4>
+<ul class="space-y-2 text-sm text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Priority-based task execution</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Retry mechanisms with exponential backoff</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Distributed task queue</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Dead letter queue for failed tasks</li>
+</ul>
+</div>
+
+<div class="code-block">
+<pre><code class="text-sm text-gray-300">
+# Priority Queue with Heap
+import heapq
+from dataclasses import dataclass, field
+from typing import Any
+
+@dataclass(order=True)
+class PriorityTask:
+priority: int
+timestamp: float = field(compare=False)
+task_id: str = field(compare=False)
+payload: Any = field(compare=False)
+retries: int = field(default=0, compare=False)
+
+class JobScheduler:
+def __init__(self):
+self.queue = [] # Min-heap
+self.task_map = {} # task_id -> task
+
+def schedule(self, task_id: str, priority: int, payload: Any, delay: int = 0):
+task = PriorityTask(
+priority=priority,
+timestamp=time.time() + delay,
+task_id=task_id,
+payload=payload
+)
+heapq.heappush(self.queue, task)
+self.task_map[task_id] = task
+
+def execute_next(self):
+if not self.queue:
+return None
+
+task = heapq.heappop(self.queue)
+
+# Check if ready to execute
+if task.timestamp > time.time():
+heapq.heappush(self.queue, task)
+return None
+
+del self.task_map[task.task_id]
+return task
+
+def retry_with_backoff(self, task: PriorityTask, max_retries: int = 3):
+if task.retries >= max_retries:
+# Move to dead letter queue
+self._move_to_dlq(task)
+return
+
+task.retries += 1
+delay = (2 ** task.retries) # Exponential backoff
+task.timestamp = time.time() + delay
+heapq.heappush(self.queue, task)
+</code></pre>
+</div>
+</div>
+
+<!-- Consistent Hashing -->
+<div class="glass-card p-8 rounded-2xl">
+<div class="flex items-start justify-between mb-6">
+<div>
+<h3 class="text-2xl font-bold text-cyan-400 mb-2">Consistent Hashing Router</h3>
+<p class="text-gray-400">Design a load balancer - routing across multiple vLLM replicas</p>
+</div>
+<span class="badge badge-hld">Weeks 5-6</span>
+</div>
+
+<div class="p-4 rounded-xl bg-cyan-900/20 border border-cyan-500/30 mb-6">
+<h4 class="font-semibold mb-3 text-cyan-300">Use Cases:</h4>
+<ul class="space-y-2 text-sm text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Distributed cache clusters</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Database sharding</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Load balancing across replicas</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Minimal redistribution on scaling</li>
+</ul>
+</div>
+
+<div class="code-block">
+<pre><code class="text-sm text-gray-300">
+# Consistent Hashing Implementation
+import hashlib
+import bisect
+
+class ConsistentHashRouter:
+def __init__(self, nodes=None, replicas=150):
+self.replicas = replicas
+self.ring = []
+self.node_map = {}
+
+if nodes:
+for node in nodes:
+self.add_node(node)
+
+def _hash(self, key):
+return int(hashlib.md5(key.encode()).hexdigest(), 16)
+
+def add_node(self, node):
+for i in range(self.replicas):
+virtual_key = f"{node}:{i}"
+hash_key = self._hash(virtual_key)
+bisect.insort(self.ring, hash_key)
+self.node_map[hash_key] = node
+
+def remove_node(self, node):
+for i in range(self.replicas):
+virtual_key = f"{node}:{i}"
+hash_key = self._hash(virtual_key)
+if hash_key in self.ring:
+self.ring.remove(hash_key)
+del self.node_map[hash_key]
+
+def get_node(self, key):
+if not self.ring:
+return None
+
+hash_key = self._hash(key)
+
+# Find the first node >= hash_key
+idx = bisect.bisect(self.ring, hash_key)
+
+# Wrap around if necessary
+if idx >= len(self.ring):
+idx = 0
+
+return self.node_map[self.ring[idx]]
+
+def scale_out(self, new_nodes):
+"""Add new nodes with minimal redistribution"""
+for node in new_nodes:
+self.add_node(node)
+# Only keys that mapped to old positions need migration
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- Tab Content: Integration -->
+<div id="integration" class="tab-content">
+<section class="py-20 px-4">
+<div class="max-w-7xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Integration Map</h2>
+<p class="text-center text-gray-400 mb-16 text-lg">How everything connects together</p>
+
+<!-- Visual Concept Map -->
+<div class="glass-card p-8 rounded-2xl mb-12 concept-map" style="min-height: 800px;">
+<div class="map-node" style="top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+API Gateway
+</div>
+
+<div class="map-node" style="top: 20%; left: 20%; background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+Rate Limiter<br/>
+<span class="text-xs">Sliding Window</span>
+</div>
+
+<div class="map-node" style="top: 20%; left: 80%; transform: translateX(-50%); background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+LRU Cache<br/>
+<span class="text-xs">TTL + Eviction</span>
+</div>
+
+<div class="map-node" style="top: 80%; left: 20%; background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);">
+Job Scheduler<br/>
+<span class="text-xs">Priority Queue</span>
+</div>
+
+<div class="map-node" style="top: 80%; left: 80%; transform: translateX(-50%); background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+Consistent Hash<br/>
+<span class="text-xs">vLLM Replicas</span>
+</div>
+
+<div class="map-node" style="top: 50%; left: 10%; transform: translateY(-50%); background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); font-size: 0.75rem;">
+DSA: Hash Map<br/>
+O(1) lookup
+</div>
+
+<div class="map-node" style="top: 50%; left: 90%; transform: translateY(-50%); background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); font-size: 0.75rem;">
+DSA: Heap<br/>
+O(log n)
+</div>
+
+<!-- Connection Lines (SVG overlay would be ideal) -->
+<svg style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.3;">
+<line x1="50%" y1="50%" x2="20%" y2="20%" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5">
+<animate attributeName="stroke-dashoffset" values="0;10;0" dur="2s" repeatCount="indefinite" />
+</line>
+<line x1="50%" y1="50%" x2="80%" y2="20%" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5">
+<animate attributeName="stroke-dashoffset" values="0;10;0" dur="2s" repeatCount="indefinite" />
+</line>
+<line x1="50%" y1="50%" x2="20%" y2="80%" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5">
+<animate attributeName="stroke-dashoffset" values="0;10;0" dur="2s" repeatCount="indefinite" />
+</line>
+<line x1="50%" y1="50%" x2="80%" y2="80%" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5">
+<animate attributeName="stroke-dashoffset" values="0;10;0" dur="2s" repeatCount="indefinite" />
+</line>
+</svg>
+</div>
+
+<!-- Data Flow Section -->
+<div class="grid md:grid-cols-2 gap-8">
+<div class="glass-card p-6 rounded-2xl">
+<h3 class="text-2xl font-bold mb-4 gradient-text-2">Request Flow</h3>
+<div class="space-y-4">
+<div class="flex items-center p-4 rounded-xl bg-white/5">
+<div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center mr-4">1</div>
+<div>
+<div class="font-semibold">Client Request</div>
+<div class="text-sm text-gray-400">HTTP/REST API call</div>
+</div>
+</div>
+<div class="flex items-center p-4 rounded-xl bg-white/5">
+<div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center mr-4">2</div>
+<div>
+<div class="font-semibold">Rate Limiter Check</div>
+<div class="text-sm text-gray-400">Sliding window algorithm</div>
+</div>
+</div>
+<div class="flex items-center p-4 rounded-xl bg-white/5">
+<div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center mr-4">3</div>
+<div>
+<div class="font-semibold">Cache Lookup</div>
+<div class="text-sm text-gray-400">LRU cache with TTL</div>
+</div>
+</div>
+<div class="flex items-center p-4 rounded-xl bg-white/5">
+<div class="w-10 h-10 rounded-full bg-yellow-600 flex items-center justify-center mr-4">4</div>
+<div>
+<div class="font-semibold">Route to Backend</div>
+<div class="text-sm text-gray-400">Consistent hashing to vLLM replica</div>
+</div>
+</div>
+<div class="flex items-center p-4 rounded-xl bg-white/5">
+<div class="w-10 h-10 rounded-full bg-pink-600 flex items-center justify-center mr-4">5</div>
+<div>
+<div class="font-semibold">Async Job Queue</div>
+<div class="text-sm text-gray-400">Priority-based execution</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="glass-card p-6 rounded-2xl">
+<h3 class="text-2xl font-bold mb-4 gradient-text-3">Technology Stack</h3>
+<div class="space-y-4">
+<div class="p-4 rounded-xl bg-gradient-to-r from-indigo-900/30 to-purple-900/30 border border-indigo-500/30">
+<h4 class="font-semibold mb-2 text-indigo-400">Frontend/Gateway</h4>
+<div class="flex flex-wrap gap-2">
+<span class="badge badge-dsa">Node.js/Express</span>
+<span class="badge badge-dsa">FastAPI</span>
+<span class="badge badge-dsa">Nginx</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-gradient-to-r from-green-900/30 to-emerald-900/30 border border-green-500/30">
+<h4 class="font-semibold mb-2 text-green-400">Caching Layer</h4>
+<div class="flex flex-wrap gap-2">
+<span class="badge badge-hld">Redis</span>
+<span class="badge badge-hld">Memcached</span>
+<span class="badge badge-hld">LRU Implementation</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-gradient-to-r from-yellow-900/30 to-orange-900/30 border border-yellow-500/30">
+<h4 class="font-semibold mb-2 text-yellow-400">Message Queue</h4>
+<div class="flex flex-wrap gap-2">
+<span class="badge badge-lld">RabbitMQ</span>
+<span class="badge badge-lld">Kafka</span>
+<span class="badge badge-lld">Priority Queue</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border border-blue-500/30">
+<h4 class="font-semibold mb-2 text-blue-400">Backend Services</h4>
+<div class="flex flex-wrap gap-2">
+<span class="badge badge-sd">vLLM Replicas</span>
+<span class="badge badge-sd">Microservices</span>
+<span class="badge badge-sd">Consistent Hashing</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- Tab Content: Progress -->
+<div id="progress" class="tab-content">
+<section class="py-20 px-4">
+<div class="max-w-4xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">Track Your Progress</h2>
+<p class="text-center text-gray-400 mb-16 text-lg">Monitor your learning journey</p>
+
+<!-- Overall Progress -->
+<div class="glass-card p-8 rounded-2xl mb-8">
+<h3 class="text-2xl font-bold mb-6">Overall Progress</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-300">Week 1-2: Foundations</span>
+<span class="text-indigo-400 font-mono">0%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 0%" data-progress="100"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-300">Week 3-4: LLD Depth</span>
+<span class="text-green-400 font-mono">0%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 0%" data-progress="100"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-300">Week 5-6: Scale Up</span>
+<span class="text-yellow-400 font-mono">0%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 0%" data-progress="100"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-gray-300">Week 7-8: Consolidate</span>
+<span class="text-pink-400 font-mono">0%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 0%" data-progress="100"></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- DSA Patterns Mastery -->
+<div class="glass-card p-8 rounded-2xl mb-8">
+<h3 class="text-2xl font-bold mb-6">DSA Patterns Mastery</h3>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<div class="p-4 rounded-xl bg-white/5 text-center">
+<div class="text-3xl font-bold text-indigo-400 mb-2">0/17</div>
+<div class="text-sm text-gray-400">Patterns Learned</div>
+</div>
+<div class="p-4 rounded-xl bg-white/5 text-center">
+<div class="text-3xl font-bold text-green-400 mb-2">0</div>
+<div class="text-sm text-gray-400">Problems Solved</div>
+</div>
+<div class="p-4 rounded-xl bg-white/5 text-center">
+<div class="text-3xl font-bold text-purple-400 mb-2">0</div>
+<div class="text-sm text-gray-400">Projects Built</div>
+</div>
+</div>
+</div>
+
+<!-- Checklist -->
+<div class="glass-card p-8 rounded-2xl">
+<h3 class="text-2xl font-bold mb-6">Weekly Checklist</h3>
+<div class="space-y-3">
+<label class="flex items-center p-4 rounded-xl bg-white/5 cursor-pointer hover:bg-white/10 transition-colors">
+<input type="checkbox" class="w-5 h-5 rounded border-gray-600 text-indigo-600 focus:ring-indigo-500 bg-gray-800">
+<span class="ml-4 text-gray-300">Complete daily DSA practice</span>
+</label>
+<label class="flex items-center p-4 rounded-xl bg-white/5 cursor-pointer hover:bg-white/10 transition-colors">
+<input type="checkbox" class="w-5 h-5 rounded border-gray-600 text-indigo-600 focus:ring-indigo-500 bg-gray-800">
+<span class="ml-4 text-gray-300">Build gateway components</span>
+</label>
+<label class="flex items-center p-4 rounded-xl bg-white/5 cursor-pointer hover:bg-white/10 transition-colors">
+<input type="checkbox" class="w-5 h-5 rounded border-gray-600 text-indigo-600 focus:ring-indigo-500 bg-gray-800">
+<span class="ml-4 text-gray-300">Attend mock interview session</span>
+</label>
+<label class="flex items-center p-4 rounded-xl bg-white/5 cursor-pointer hover:bg-white/10 transition-colors">
+<input type="checkbox" class="w-5 h-5 rounded border-gray-600 text-indigo-600 focus:ring-indigo-500 bg-gray-800">
+<span class="ml-4 text-gray-300">Review system design concepts</span>
+</label>
+<label class="flex items-center p-4 rounded-xl bg-white/5 cursor-pointer hover:bg-white/10 transition-colors">
+<input type="checkbox" class="w-5 h-5 rounded border-gray-600 text-indigo-600 focus:ring-indigo-500 bg-gray-800">
+<span class="ml-4 text-gray-300">Document learnings and trade-offs</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- Modal -->
+<div id="detailModal" class="modal">
+<div class="modal-content">
+<div class="flex justify-between items-center mb-6">
+<h3 id="modalTitle" class="text-2xl font-bold gradient-text"></h3>
+<button onclick="closeModal()" class="text-gray-400 hover:text-white transition-colors">
+<i class="fas fa-times text-2xl"></i>
+</button>
+</div>
+<div id="modalBody" class="space-y-4">
+<!-- Dynamic content -->
+</div>
+</div>
+</div>
+
+<!-- Footer -->
+<footer class="py-12 px-4 border-t border-white/10 mt-20">
+<div class="max-w-7xl mx-auto text-center">
+<p class="text-gray-400 mb-4">Your 8-week journey to mastering System Design & DSA Patterns</p>
+<div class="flex justify-center gap-6 text-sm text-gray-500">
+<span><i class="fas fa-code mr-2"></i>Code Daily</span>
+<span><i class="fas fa-book mr-2"></i>Learn Continuously</span>
+<span><i class="fas fa-rocket mr-2"></i>Build Projects</span>
+</div>
+</div>
+</footer>
+
+<script>
+// Register GSAP ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
+
+// Animated counter
+function animateCounter(element) {
+const target = parseInt(element.getAttribute('data-target'));
+const duration = 2000;
+const step = target / (duration / 16);
+let current = 0;
+
+const timer = setInterval(() => {
+current += step;
+if (current >= target) {
+element.textContent = target;
+clearInterval(timer);
+} else {
+element.textContent = Math.floor(current);
+}
+}, 16);
+}
+
+// Intersection Observer for counters
+const observerOptions = {
+threshold: 0.5
+};
+
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+animateCounter(entry.target);
+observer.unobserve(entry.target);
+}
+});
+}, observerOptions);
+
+document.querySelectorAll('.stat-number').forEach(stat => {
+observer.observe(stat);
+});
+
+// Tab switching
+function switchTab(tabName) {
+// Hide all tabs
+document.querySelectorAll('.tab-content').forEach(tab => {
+tab.classList.remove('active');
+});
+
+// Remove active class from all buttons
+document.querySelectorAll('.tab-button').forEach(btn => {
+btn.classList.remove('active');
+btn.classList.add('text-gray-400');
+btn.classList.remove('text-indigo-400');
+});
+
+// Show selected tab
+document.getElementById(tabName).classList.add('active');
+
+// Add active class to clicked button
+event.target.classList.add('active');
+event.target.classList.remove('text-gray-400');
+event.target.classList.add('text-indigo-400');
+
+// Scroll to top
+window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Modal functions
+const modalData = {
+'hashmap': {
+title: 'Hash Map',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Hash maps provide O(1) average time complexity for insert, delete, and lookup operations.</p>
+<h4 class="font-semibold text-indigo-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Caches: Store key-value pairs for fast retrieval</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Dedup sets: Track seen items efficiently</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Request routing tables: Map endpoints to handlers</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>DataLoader batching: Group database queries</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>DB hash joins: Efficient join operations</li>
+</ul>
+<h4 class="font-semibold text-indigo-400 mt-4">Practice Problems:</h4>
+<ul class="space-y-2 text-gray-300">
+<li>• Two Sum</li>
+<li>• Group Anagrams</li>
+<li>• Valid Anagram</li>
+<li>• Contains Duplicate</li>
+</ul>
+</div>
+`
+},
+'lru': {
+title: 'LRU Cache (Doubly Linked List + Hash Map)',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Combines O(1) hash map lookups with O(1) doubly linked list operations for efficient cache eviction.</p>
+<h4 class="font-semibold text-purple-400 mt-4">Implementation Details:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Hash map: key → node pointer</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Doubly linked list: maintains access order</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Head: Most Recently Used (MRU)</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Tail: Least Recently Used (LRU)</li>
+</ul>
+<h4 class="font-semibold text-purple-400 mt-4">Practice Problems:</h4>
+<ul class="space-y-2 text-gray-300">
+<li>• LeetCode 146: LRU Cache</li>
+<li>• LFU Cache</li>
+<li>• Design Twitter</li>
+</ul>
+</div>
+`
+},
+'trie': {
+title: 'Trie / Radix Tree',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Prefix tree optimized for string operations with O(k) time complexity where k is key length.</p>
+<h4 class="font-semibold text-pink-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>URL routers: Fast path matching</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>IP routing tables: Longest prefix match</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Autocomplete: Prefix-based suggestions</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Feature-flag prefixes: Hierarchical flags</li>
+</ul>
+</div>
+`
+},
+'heap': {
+title: 'Heap / Priority Queue',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Binary heap provides O(log n) insert/extract operations with O(1) access to min/max element.</p>
+<h4 class="font-semibold text-yellow-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Task scheduling: Priority-based execution</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Top-K queries: Find K largest/smallest</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Timer wheels: Efficient event scheduling</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Dijkstra's algorithm: Shortest path</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>K-way merge: Merge sorted streams</li>
+</ul>
+</div>
+`
+},
+'btree': {
+title: 'B-Tree / B+ Tree',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Self-balancing tree optimized for disk-based storage with O(log n) operations.</p>
+<h4 class="font-semibold text-green-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Every relational database index</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>PostgreSQL, MySQL, Oracle indexes</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>File systems (ext4, NTFS, HFS+)</li>
+</ul>
+</div>
+`
+},
+'lsm': {
+title: 'LSM Tree + SSTables',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Log-Structured Merge tree optimized for write-heavy workloads with O(1) amortized writes.</p>
+<h4 class="font-semibold text-blue-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Cassandra: Distributed NoSQL database</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>RocksDB: Embedded key-value store</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>LevelDB: Fast key-value store by Google</li>
+</ul>
+</div>
+`
+},
+'sliding': {
+title: 'Sliding Window',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Process elements in a window that slides through the data with O(n) time complexity.</p>
+<h4 class="font-semibold text-red-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Rate limiters: Track requests per time window</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Moving averages: Real-time analytics</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Stream aggregation: Process data streams</li>
+</ul>
+</div>
+`
+},
+'twopointers': {
+title: 'Two Pointers / Merge',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Use two pointers to traverse data structures efficiently with O(n+m) complexity.</p>
+<h4 class="font-semibold text-cyan-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Intersecting sorted posting lists (search engines)</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Merging sorted shards in distributed systems</li>
+</ul>
+</div>
+`
+},
+'binary': {
+title: 'Binary Search',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Efficiently search sorted data in O(log n) time by halving the search space.</p>
+<h4 class="font-semibold text-orange-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Consistent hashing ring lookup</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Time-series index seek</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Rate-limit calibration</li>
+</ul>
+</div>
+`
+},
+'bloom': {
+title: 'Bloom Filter',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Probabilistic data structure for set membership testing with O(k) time and space efficiency.</p>
+<h4 class="font-semibold text-teal-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Cache penetration guard: Avoid DB queries for non-existent keys</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>"Definitely not in this SSTable": LSM tree optimization</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Dedup at scale: Track seen items with minimal memory</li>
+</ul>
+</div>
+`
+},
+'countmin': {
+title: 'Count-Min Sketch',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Probabilistic data structure for frequency estimation with O(k) operations.</p>
+<h4 class="font-semibold text-lime-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Heavy-hitter detection: Find frequent items</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Approximate rate limiting</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>W-TinyLFU admission: Cache admission policy</li>
+</ul>
+</div>
+`
+},
+'hll': {
+title: 'HyperLogLog',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Probabilistic cardinality estimation with O(1) operations and constant space (12 KB).</p>
+<h4 class="font-semibold text-emerald-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Approximate distinct counts</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Unique visitors tracking</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Analytics at scale</li>
+</ul>
+</div>
+`
+},
+'consistent': {
+title: 'Consistent Hashing',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Distribute data across nodes with minimal redistribution when scaling (O(log n) lookup).</p>
+<h4 class="font-semibold text-violet-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Sharding: Distribute data across databases</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Cache clusters: Redis/Memcached distribution</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Load balancer key affinity: Sticky sessions</li>
+</ul>
+</div>
+`
+},
+'merkle': {
+title: 'Merkle Tree',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Hash tree for efficient verification of large data structures with O(log n) operations.</p>
+<h4 class="font-semibold text-fuchsia-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Anti-entropy repair in Dynamo/Cassandra</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Git: Commit and object verification</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Blockchains: Transaction verification</li>
+</ul>
+</div>
+`
+},
+'topo': {
+title: 'Topological Sort',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Linear ordering of vertices in a DAG with O(V+E) time complexity.</p>
+<h4 class="font-semibold text-rose-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Task/DAG dependency resolution</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Migration ordering: Database schema changes</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Build systems: Make, Bazel, etc.</li>
+</ul>
+</div>
+`
+},
+'union': {
+title: 'Union-Find (Disjoint Set)',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Track elements partitioned into disjoint sets with ~O(1) amortized operations.</p>
+<h4 class="font-semibold text-amber-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Connected components in graphs</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Fraud-ring detection</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Dedup clustering</li>
+</ul>
+</div>
+`
+},
+'graph': {
+title: 'Graph BFS/DFS',
+content: `
+<div class="space-y-4">
+<p class="text-gray-300">Traverse graph structures with O(V+E) time complexity.</p>
+<h4 class="font-semibold text-sky-400 mt-4">Backend Applications:</h4>
+<ul class="space-y-2 text-gray-300">
+<li><i class="fas fa-check text-green-500 mr-2"></i>Permission traversal (ReBAC - Relationship-based Access Control)</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Social graphs: Friends, followers</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i>Dependency impact analysis</li>
+</ul>
+</div>
+`
+}
+};
+
+function openModal(pattern) {
+const modal = document.getElementById('detailModal');
+const title = document.getElementById('modalTitle');
+const body = document.getElementById('modalBody');
+
+const data = modalData[pattern];
+title.textContent = data.title;
+body.innerHTML = data.content;
+
+modal.classList.add('active');
+}
+
+function closeModal() {
+const modal = document.getElementById('detailModal');
+modal.classList.remove('active');
+}
+
+// Close modal on outside click
+document.getElementById('detailModal').addEventListener('click', function(e) {
+if (e.target === this) {
+closeModal();
+}
+});
+
+// Smooth scroll
+function scrollToSection(sectionId) {
+const element = document.getElementById(sectionId);
+if (element) {
+element.scrollIntoView({ behavior: 'smooth' });
+}
+}
+
+// Animate skill bars on scroll
+const skillObserver = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+const progress = entry.target;
+const targetWidth = progress.getAttribute('data-progress');
+progress.style.width = targetWidth + '%';
+}
+});
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.skill-progress').forEach(bar => {
+skillObserver.observe(bar);
+});
+
+// Navigation glow on scroll
+window.addEventListener('scroll', () => {
+const navGlow = document.getElementById('navGlow');
+if (window.scrollY > 100) {
+navGlow.classList.add('visible');
+} else {
+navGlow.classList.remove('visible');
+}
+});
+
+// Particle animation
+function createParticle() {
+const container = document.getElementById('canvas-container');
+const particle = document.createElement('div');
+particle.className = 'particle';
+
+const size = Math.random() * 5 + 2;
+particle.style.width = size + 'px';
+particle.style.height = size + 'px';
+particle.style.left = Math.random() * 100 + '%';
+particle.style.top = Math.random() * 100 + '%';
+particle.style.opacity = Math.random() * 0.5;
+
+container.appendChild(particle);
+
+// Animate particle
+gsap.to(particle, {
+y: -100,
+opacity: 0,
+duration: Math.random() * 3 + 2,
+ease: 'power1.out',
+onComplete: () => {
+particle.remove();
+}
+});
+}
+
+// Create particles periodically
+setInterval(createParticle, 500);
+
+// GSAP animations
+gsap.utils.toArray('.glass-card').forEach((card, i) => {
+gsap.from(card, {
+scrollTrigger: {
+trigger: card,
+start: 'top 80%',
+},
+y: 50,
+opacity: 0,
+duration: 0.6,
+delay: i * 0.1,
+ease: 'power2.out'
+});
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+if (e.key === 'Escape') {
+closeModal();
+}
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+console.log('System Design & DSA Mastery Roadmap loaded successfully!');
+});
+</script>
+</body>
+</html>
